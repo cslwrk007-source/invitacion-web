@@ -61,7 +61,6 @@ body{
               visibility 0.9s;
 }
 
-/* Contenedor exclusivo para la secuencia de imágenes del lazo */
 .ribbon-sequence {
   position: relative;
   width: min(88vw, 360px);
@@ -80,7 +79,6 @@ body{
   object-fit: contain;
 }
 
-/* Formulario de número de invitado */
 .access-box {
   margin-top: 15px;
   display: flex;
@@ -150,7 +148,6 @@ body{
   pointer-events: none;
 }
 
-/* TARJETA PERSONALIZADA DE INVITADO */
 .invitado-badge {
   background: rgba(216, 196, 155, 0.18);
   border: 1px solid var(--champagne);
@@ -338,7 +335,7 @@ body{
 
 .cards{
   display: flex;
-  justify-content: center; /* Centra la tarjeta horizontalmente */
+  justify-content: center;
   margin-top: 30px;
 }
 
@@ -372,18 +369,6 @@ body{
   letter-spacing:1px;
 }
 
-.timeline{max-width:650px;margin:25px auto;text-align:left}
-
-.item{
-  display:flex;
-  gap:25px;
-  padding:17px 0;
-  border-bottom:1px solid #ddd6c5;
-}
-
-.hour{min-width:85px;font-weight:600;color:#4b5635;font-size:13px}
-.desc{font:22px 'Cormorant Garamond',serif;color:#3e4036}
-
 .choices{
   display:flex;
   justify-content:center;
@@ -415,28 +400,6 @@ body{
   height:220px;
   object-fit:cover;
   border-radius:3px;
-}
-
-.historia{
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:25px;
-}
-
-.historia .h{width:200px}
-.historia img{
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  border-radius:50%;
-}
-
-.h h3{
-  font:25px 'Cormorant Garamond',serif;
-  color:#4b5635;
-  margin:8px;
 }
 
 .confirm{
@@ -513,9 +476,7 @@ body{
   .cards{grid-template-columns:1fr}
   .galeria{grid-template-columns:1fr 1fr}
   .galeria img{height:170px}
-  .item{gap:12px}
-  .hour{min-width:70px}
-  .texto,.desc{color:#303824}
+  .texto{color:#303824}
 }
 
 @media(max-width:380px){
@@ -549,7 +510,6 @@ button,input,select,textarea{
 }
 
 .page .texto,
-.page .desc,
 .page .ref,
 .page .card p,
 .page .choice,
@@ -612,18 +572,6 @@ button,input,select,textarea{
   color:#fff;
 }
 
-.page .item{
-  border-color:rgba(216,196,155,.55);
-}
-
-.page .hour{
-  color:#fffdf8;
-}
-
-.page .historia .h h3{
-  color:#fffdf8;
-}
-
 .page .confirm input,
 .page .confirm select,
 .page .confirm textarea{
@@ -637,8 +585,7 @@ button,input,select,textarea{
 }
 
 .page .foto,
-.page .galeria img,
-.page .historia img{
+.page .galeria img{
   box-shadow:0 12px 30px rgba(0,0,0,.20);
 }
 
@@ -653,7 +600,6 @@ button,input,select,textarea{
 
 <!-- CAPA SOBREPUESTA SOLAMENTE CON LA ANIMACIÓN DEL LAZO Y FORMULARIO -->
 <div class="envelope-overlay" id="envelope">
-  <!-- Secuencia de imágenes del lazo libre de sobre -->
   <div class="ribbon-sequence" onclick="validarYAbrir()">
     <img id="ribbonImg" src="https://lh3.googleusercontent.com/d/1Y5CHQizvQbeGIsgBmHzvbvhqLwELLgNN" alt="Animación Lazo">
   </div>
@@ -700,11 +646,13 @@ button,input,select,textarea{
     </p>
 
     <p class="texto">
-  Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos. Por eso, quiero hacerte una pregunta muy especial… </p>
-<p class="texto">
-¿Quieres ser una de mis damas de honor? </p>
-<p class="texto">
-Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, llorando de emoción y siendo parte de uno de los capítulos más hermosos de mi vida.
+      Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos. Por eso, quiero hacerte una pregunta muy especial… 
+    </p>
+    <p class="texto">
+      ¿Quieres ser una de mis damas de honor? 
+    </p>
+    <p class="texto">
+      Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, llorando de emoción y siendo parte de uno de los capítulos más hermosos de mi vida.
     </p>
     <div class="versiculo">
       “Lo que Dios ha unido, que no lo separe el hombre.”
@@ -729,12 +677,11 @@ Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, lloran
     <div class="sub">Cada vez falta menos</div>
     <h2 class="titulo">Nuestro gran día</h2>
     <div class="count">
-      <div class="time"><b id="dias">00</b><span>DÍAS</span></div>
-      <div class="time"><b id="horas">00</b><span>HORAS</span></div>
-      <div class="time"><b id="min">00</b><span>MINUTOS</span></div>
-      <div class="time"><b id="seg">00</b><span>SEGUNDOS</span></div>
+      <div class="time"><b id="diasVal">00</b><span>DÍAS</span></div>
+      <div class="time"><b id="horasVal">00</b><span>HORAS</span></div>
+      <div class="time"><b id="minVal">00</b><span>MINUTOS</span></div>
+      <div class="time"><b id="segVal">00</b><span>SEGUNDOS</span></div>
     </div>
-    
   </div>
 </section>
 
@@ -744,18 +691,15 @@ Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, lloran
     <h2 class="titulo">El gran día</h2>
     <div class="cards">
       <div class="card">
-      <div class="card">
-        
         <h3>Ceremonia</h3>
-	<h3>    &  </h3>
-	<h3>Recepción</h3>
+        <h3>&amp;</h3>
+        <h3>Recepción</h3>
         <p>Rancho Montisel<br>2:00 p. m.<br>Cervantes, Cartago<br></p>
         <a class="btnmap" href="https://maps.app.goo.gl/3cg8vaAeJGMx7jsCA" target="_blank" onclick="event.stopPropagation()">VER UBICACIÓN</a>
       </div>
     </div>
   </div>
 </section>
-
 
 <section class="page">
   <div class="inner">
@@ -769,8 +713,6 @@ Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, lloran
     <p style="margin-top:30px;font-size:13px;color:#3e4036">Gracias por acompañarnos con su elegancia y cariño.</p>
   </div>
 </section>
-
-
 
 <section class="page">
   <div class="inner">
@@ -830,17 +772,9 @@ Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, lloran
 
 <script>
 /* =====================================================
-   LISTA DE INVITADOS
+   URL DE GOOGLE APPS SCRIPT
    ===================================================== */
-const listaInvitados = {
-  "87600804": "Dama de Honor Cata",
-  "85703985": "Dama de Honor Caro",
-  "64184322": "Dama de Honor Marijo",
-  "83077931": "Dama de Honor Sherry",
-  "89318184": "Dama de Honor Yhoali",
-  "89758674": "Dama de Honor Megan",
-  "63636861": "Dama de Honor Conejito"
-};
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznFywqVOrT7KxISlHLtcBnL01ukPpLem4oo8KLPRb7usqV7zjceC_yE9xkGgD4uEb2/exec";
 
 /* =====================================================
    RUTAS DE LAS 14 IMÁGENES DE LA ANIMACIÓN
@@ -862,7 +796,6 @@ const imagenesLazo = [
   "https://lh3.googleusercontent.com/d/1Y0u_HAqCV5I5kUQ8kuydoweGPk42gOYE"
 ];
 
-// Precarga de imágenes para evitar parpadeos durante la animación
 const imagenesPrecargadas = [];
 imagenesLazo.forEach(src => {
   const img = new Image();
@@ -871,7 +804,7 @@ imagenesLazo.forEach(src => {
 });
 
 /* =====================================================
-   LÓGICA DE VALIDACIÓN Y ANIMACIÓN
+   LÓGICA DE VALIDACIÓN CON GOOGLE APPS SCRIPT
    ===================================================== */
 const envelope = document.getElementById('envelope');
 const ribbonImg = document.getElementById('ribbonImg');
@@ -880,7 +813,7 @@ const errorMsg = document.getElementById('errorMsg');
 
 let isAnimating = false;
 
-function validarYAbrir() {
+async function validarYAbrir() {
   if (isAnimating) return;
 
   const codigo = inviteInput.value.trim();
@@ -890,17 +823,31 @@ function validarYAbrir() {
     return;
   }
 
-  if (listaInvitados[codigo]) {
-    const nombreInvitado = listaInvitados[codigo];
-    
-    //document.getElementById('displayInvitadoPortada').textContent = nombreInvitado;
-    document.getElementById('displayInvitadoBienvenida').textContent = nombreInvitado;
-    document.getElementById('nombre').value = nombreInvitado;
+  errorMsg.style.color = "#d8c49b";
+  errorMsg.textContent = "Verificando...";
 
-    errorMsg.textContent = "";
-    desatarLazo();
-  } else {
-    errorMsg.textContent = "Número de teléfono no válido. Verifica tu invitación.";
+  try {
+    const response = await fetch(`${SCRIPT_URL}?phone=${encodeURIComponent(codigo)}`);
+    const data = await response.json();
+
+    if (data.valid) {
+      const nombreInvitado = data.nombre;
+      
+      const elPortada = document.getElementById('displayInvitadoPortada');
+      if(elPortada) elPortada.textContent = nombreInvitado;
+      
+      document.getElementById('displayInvitadoBienvenida').textContent = nombreInvitado;
+      document.getElementById('nombre').value = nombreInvitado;
+
+      errorMsg.textContent = "";
+      desatarLazo();
+    } else {
+      errorMsg.style.color = "#ff8b8b";
+      errorMsg.textContent = "Número de teléfono no válido. Verifica tu invitación.";
+    }
+  } catch (err) {
+    errorMsg.style.color = "#ff8b8b";
+    errorMsg.textContent = "Error al conectar. Intenta de nuevo.";
   }
 }
 
@@ -909,7 +856,7 @@ function desatarLazo() {
 
   let currentFrame = 0;
   const totalFrames = imagenesLazo.length;
-  const speedMs = 150; // Tiempo entre cada imagen en milisegundos
+  const speedMs = 150;
 
   const interval = setInterval(() => {
     currentFrame++;
@@ -924,7 +871,7 @@ function desatarLazo() {
 }
 
 /* =====================================================
-   LÓGICA DE NAVEGACIÓN Y CONTADOR DE LA INVITACIÓN
+   LÓGICA DE NAVEGACIÓN
    ===================================================== */
 const pages = [...document.querySelectorAll('.page')];
 let current = 0;
@@ -994,36 +941,41 @@ document.addEventListener('touchend',(e)=>{
   }
 },{passive:true});
 
+/* =====================================================
+   CONTADOR DE TIEMPO (CORREGIDO DE NOMBRES)
+   ===================================================== */
 const weddingDate = new Date('2027-01-31T14:00:00');
 
 function updateCountdown(){
-  const now=new Date();
-  let diff=weddingDate-now;
-  if(diff<0) diff=0;
+  const now = new Date();
+  let diff = weddingDate - now;
+  if(diff < 0) diff = 0;
 
-  const days=Math.floor(diff/86400000);
-  const hours=Math.floor((diff%86400000)/3600000);
-  const min=Math.floor((diff%3600000)/60000);
-  const sec=Math.floor((diff%60000)/1000);
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
 
-  document.getElementById('dias').textContent=String(days).padStart(2,'0');
-  document.getElementById('horas').textContent=String(hours).padStart(2,'0');
-  document.getElementById('min').textContent=String(min).padStart(2,'0');
-  document.getElementById('seg').textContent=String(sec).padStart(2,'0');
+  document.getElementById('diasVal').textContent = String(d).padStart(2,'0');
+  document.getElementById('horasVal').textContent = String(h).padStart(2,'0');
+  document.getElementById('minVal').textContent = String(m).padStart(2,'0');
+  document.getElementById('segVal').textContent = String(s).padStart(2,'0');
 }
 
 updateCountdown();
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 
+/* =====================================================
+   CONFIRMACIÓN VÍA WHATSAPP (OCULTANDO EL NÚMERO)
+   ===================================================== */
 function confirmar(event){
-  event.preventDefault();
+  if (event) event.preventDefault();
 
-  const numero='50660854780';
-  const nombre=document.getElementById('nombre').value;
-  const asistencia=document.getElementById('asistencia').value;
-  const mensaje=document.getElementById('mensaje').value || 'Sin mensaje';
+  const nombre = document.getElementById('nombre').value;
+  const asistencia = document.getElementById('asistencia').value;
+  const mensaje = document.getElementById('mensaje').value || 'Sin mensaje';
 
-  const texto =
+  const texto = 
 `Hola Christopher y Paola 🤍
 
 Soy ${nombre}.
@@ -1032,10 +984,10 @@ Mensaje: ${mensaje}
 
 ¡Gracias por la invitación!`;
 
-  window.open(
-    'https://wa.me/'+numero+'?text='+encodeURIComponent(texto),
-    '_blank'
-  );
+  const urlFinal = `${SCRIPT_URL}?action=whatsapp&text=${encodeURIComponent(texto)}`;
+  
+  // Redirecciona a través de Google Script para ocultar el número
+  window.location.href = urlFinal;
 }
 
 updateDots();
