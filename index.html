@@ -40,9 +40,6 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-/* =====================================================
-   ESTILOS DE LA CAPA DE VALIDACIÓN (SIN SOBRE)
-   ===================================================== */
 .envelope-overlay {
   position: fixed;
   top: 0;
@@ -173,9 +170,6 @@ body{
   color: #fffdf8;
 }
 
-/* =====================================================
-   ESTILOS DE LA INVITACIÓN
-   ===================================================== */
 #app{width:100%;height:100%;position:relative;overflow:hidden}
 
 .page{
@@ -502,7 +496,6 @@ button,input,select,textarea{
   background-clip:padding-box;
 }
 
-/* TEMA VERDE OLIVO - FONDO GENERAL */
 .page,
 .page.crema{
   background-color:#69734a !important;
@@ -770,14 +763,9 @@ button,input,select,textarea{
 <div class="nav" id="nav">TOCA PARA CONTINUAR</div>
 
 <script>
-/* =====================================================
-   URL DE GOOGLE APPS SCRIPT
-   ===================================================== */
+
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznFywqVOrT7KxISlHLtcBnL01ukPpLem4oo8KLPRb7usqV7zjceC_yE9xkGgD4uEb2/exec";
 
-/* =====================================================
-   RUTAS DE LAS 14 IMÁGENES DE LA ANIMACIÓN
-   ===================================================== */
 const imagenesLazo = [
   "https://lh3.googleusercontent.com/d/1Y5CHQizvQbeGIsgBmHzvbvhqLwELLgNN",
   "https://lh3.googleusercontent.com/d/1GzM_5HYuig3eplN3SwPF8OKE4ggtD7mr",
@@ -802,9 +790,6 @@ imagenesLazo.forEach(src => {
   imagenesPrecargadas.push(img);
 });
 
-/* =====================================================
-   LÓGICA DE VALIDACIÓN CON GOOGLE APPS SCRIPT
-   ===================================================== */
 const envelope = document.getElementById('envelope');
 const ribbonImg = document.getElementById('ribbonImg');
 const inviteInput = document.getElementById('inviteCode');
@@ -868,10 +853,6 @@ function desatarLazo() {
     }
   }, speedMs);
 }
-
-/* =====================================================
-   LÓGICA DE NAVEGACIÓN
-   ===================================================== */
 const pages = [...document.querySelectorAll('.page')];
 let current = 0;
 let startX = 0;
@@ -940,9 +921,7 @@ document.addEventListener('touchend',(e)=>{
   }
 },{passive:true});
 
-/* =====================================================
-   CONTADOR DE TIEMPO (CORREGIDO DE NOMBRES)
-   ===================================================== */
+
 const weddingDate = new Date('2027-01-31T14:00:00');
 
 function updateCountdown(){
@@ -964,9 +943,6 @@ function updateCountdown(){
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-/* =====================================================
-   CONFIRMACIÓN VÍA WHATSAPP (OCULTANDO EL NÚMERO)
-   ===================================================== */
 function confirmar(event){
   if (event) event.preventDefault();
 
