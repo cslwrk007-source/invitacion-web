@@ -40,6 +40,7 @@ body{
   text-rendering:optimizeLegibility;
 }
 
+
 .envelope-overlay {
   position: fixed;
   top: 0;
@@ -496,6 +497,7 @@ button,input,select,textarea{
   background-clip:padding-box;
 }
 
+/* TEMA VERDE OLIVO - FONDO GENERAL */
 .page,
 .page.crema{
   background-color:#69734a !important;
@@ -591,6 +593,7 @@ button,input,select,textarea{
 
 <body>
 
+
 <div class="envelope-overlay" id="envelope">
   <div class="ribbon-sequence" onclick="validarYAbrir()">
     <img id="ribbonImg" src="https://lh3.googleusercontent.com/d/1LgdcRVFy-Skeyx4TTxsKK6opf4PlKzlQ" alt="Animación Lazo">
@@ -627,6 +630,7 @@ button,input,select,textarea{
   </div>
 </section>
 
+<!-- SECCIÓN 2: BIENVENIDA Y MENSAJE PERSONALIZADO -->
 <section class="page">
   <div class="inner">
     <div class="sub">Con mucha alegría</div>
@@ -636,15 +640,13 @@ button,input,select,textarea{
       Estimado(a) <strong id="displayInvitadoBienvenida" style="color: var(--champagne);">Invitado</strong>,
     </p>
 
-    <p class="texto">
-      Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos. Por eso, quiero hacerte una pregunta muy especial… 
-    </p>
-    <p class="texto">
-      ¿Quieres ser una de mis damas de honor? 
-    </p>
-    <p class="texto">
-      Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, llorando de emoción y siendo parte de uno de los capítulos más hermosos de mi vida.
-    </p>
+    <!-- ÁREA CON CONTENIDO DINÁMICO SEGÚN ROL -->
+    <div id="contenidoDinamico">
+      <p class="texto">
+        Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos. Por eso, queremos invitarte a ser parte de este día tan especial.
+      </p>
+    </div>
+
     <div class="versiculo">
       “Lo que Dios ha unido, que no lo separe el hombre.”
       <span class="ref">Mateo 19:6</span>
@@ -692,19 +694,24 @@ button,input,select,textarea{
   </div>
 </section>
 
+<!-- SECCIÓN DRESS CODE PERSONALIZADO -->
 <section class="page">
   <div class="inner">
     <div class="sub">Dress Code</div>
     <h2 class="titulo">Código de vestimenta</h2>
-    <p class="texto">Queremos que nos acompañes luciendo elegante con un verde olivo por ser dama de honor para celebrar este día tan especial.</p>
-    <div class="choices">
-      <div class="choice"><span class="emoji">🤵</span><b>Formal</b></div>
-      <div class="choice"><span class="emoji">👗</span><b>Vestimenta elegante</b></div>
+    <p class="texto" id="textoDressCode">Queremos que nos acompañes luciendo elegante para celebrar este día tan especial con nosotros.</p>
+    
+    <div class="choices" id="choicesDressCode">
+      <!-- Se rellenará o mostrará dinámicamente según el tipo -->
+      <div class="choice" id="choiceCaballero"><span class="emoji">🤵</span><b>Formal / Traje elegante</b></div>
+      <div class="choice" id="choiceDama"><span class="emoji">👗</span><b>Vestido de Gala / Largo</b></div>
     </div>
-    <p style="margin-top:30px;font-size:13px;color:#3e4036">Gracias por acompañarnos con su elegancia y cariño.</p>
+
+    <p style="margin-top:30px;font-size:13px;color:#3e4036" id="notaDressCode">Gracias por acompañarnos con su elegancia y cariño.</p>
   </div>
 </section>
 
+<!-- SECCIÓN DE REGALOS -->
 <section class="page">
   <div class="inner">
     <div class="sub">Muestra de cariño</div>
@@ -720,7 +727,7 @@ button,input,select,textarea{
     </p>
   </div>
 </section>
-  
+
 <section class="page">
   <div class="inner">
     <div class="sub">Recuerdos</div>
@@ -779,9 +786,10 @@ button,input,select,textarea{
 
 <script>
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbznFywqVOrT7KxISlHLtcBnL01ukPpLem4oo8KLPRb7usqV7zjceC_yE9xkGgD4uEb2/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqYaVyQkZETw_pnGT6ZTd9nPXYKVthBrPZeVNG4KSkwDh8MS43f9uuBVZdHyUkUYqs/exec";
 
-const imagenesLazo = [  
+
+const imagenesLazo = [
   "https://lh3.googleusercontent.com/d/1LgdcRVFy-Skeyx4TTxsKK6opf4PlKzlQ",
   "https://lh3.googleusercontent.com/d/13bJ7HLP2XhGeVi9DkJoMdPBhlxMVt5Kr",
   "https://lh3.googleusercontent.com/d/1jFQ_ltQFn0_va8yyFZQHHLVctKwyNvQD",
@@ -804,6 +812,7 @@ imagenesLazo.forEach(src => {
   img.src = src;
   imagenesPrecargadas.push(img);
 });
+
 
 const envelope = document.getElementById('envelope');
 const ribbonImg = document.getElementById('ribbonImg');
@@ -831,12 +840,65 @@ async function validarYAbrir() {
 
     if (data.valid) {
       const nombreInvitado = data.nombre;
+      const tipoInvitado = data.tipo; // 'dama', 'caballero' o 'invitado'
       
       const elPortada = document.getElementById('displayInvitadoPortada');
       if(elPortada) elPortada.textContent = nombreInvitado;
       
       document.getElementById('displayInvitadoBienvenida').textContent = nombreInvitado;
       document.getElementById('nombre').value = nombreInvitado;
+
+      // Personalización dinámica según el rol
+      const contenedorMensaje = document.getElementById('contenidoDinamico');
+      const textoDressCode = document.getElementById('textoDressCode');
+
+      if (tipoInvitado === 'dama') {
+        contenedorMensaje.innerHTML = `
+          <p class="texto">
+            Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos. Por eso, quiero hacerte una pregunta muy especial… 
+          </p>
+          <p class="texto" style="font-weight: 600; font-size: 1.25rem; color: var(--champagne); ">
+            ¿Quieres ser una de mis damas de honor?
+          </p>
+          <p class="texto">
+            Quiero tenerte a mi lado en este día tan importante, celebrando, riendo, llorando de emoción y siendo parte de uno de los capítulos más hermosos de mi vida.
+          </p>
+        `;
+        textoDressCode.textContent = "Queremos que nos acompañes luciendo elegante con un vestido verde olivo por ser dama de honor para celebrar este día tan especial.";
+
+      } else if (tipoInvitado === 'caballero') {
+        contenedorMensaje.innerHTML = `
+          <p class="texto">
+            Hay momentos trascendentales que solo se disfrutan al máximo rodeado de las grandes personas que han estado siempre ahí. Por eso, quiero hacerte una pregunta muy especial…
+          </p>
+          <p class="texto" style="font-weight: 600; font-size: 1.25rem; color: var(--champagne); margin: 15px 0;">
+            ¿Quieres ser uno de mis caballeros de honor?
+          </p>
+          <p class="texto">
+            Sera un honor para mí contar contigo a mi lado en este gran día, compartiendo, celebrando y viviendo este momento histórico juntos.
+          </p>
+        `;
+        textoDressCode.textContent = "Queremos que nos acompañes luciendo un traje formal y elegante como caballero de honor de color de camisa verde olivo o verde musgo.";
+
+      } else {
+        // Rol: Invitado General
+        contenedorMensaje.innerHTML = `
+          <p class="texto">
+            Hay momentos que se vuelven inolvidables cuando los compartimos con las personas que amamos.
+          </p>
+          <p class="texto">
+            Nos alegra muchísimo invitarte a ser parte de nuestra boda y celebrar juntos el inicio de este hermoso y nuevo capítulo en nuestras vidas.
+          </p>
+        `;
+        textoDressCode.innerHTML = `Para mantener la armonía y elegancia de nuestra celebración, les pedimos amablemente evitar los siguientes colores:<br><br>
+🚫 Verde olivo<br>
+🚫 Verde musgo<br>
+🚫 Champagne<br>
+🚫 Beige<br>
+🚫 Blanco<br><br>
+✨ ¡Gracias por ayudarnos a cuidar cada detalle de este día tan especial! 💍🤍`;
+
+      }
 
       errorMsg.textContent = "";
       desatarLazo();
@@ -849,6 +911,8 @@ async function validarYAbrir() {
     errorMsg.textContent = "Error al conectar. Intenta de nuevo.";
   }
 }
+
+
 
 function desatarLazo() {
   isAnimating = true;
@@ -868,6 +932,8 @@ function desatarLazo() {
     }
   }, speedMs);
 }
+
+
 const pages = [...document.querySelectorAll('.page')];
 let current = 0;
 let startX = 0;
@@ -958,6 +1024,7 @@ function updateCountdown(){
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+
 function confirmar(event){
   if (event) event.preventDefault();
 
@@ -976,7 +1043,6 @@ Mensaje: ${mensaje}
 
   const urlFinal = `${SCRIPT_URL}?action=whatsapp&text=${encodeURIComponent(texto)}`;
   
-  // Redirecciona a través de Google Script para ocultar el número
   window.location.href = urlFinal;
 }
 
