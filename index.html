@@ -797,7 +797,7 @@ button,input,select,textarea{
 
 <script>
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0K8Hb6UjxP9YOM9DaPSqDkLst0-4IWoCW6xtEz5Lg2JJ1KP0mAB2o5tHNFJXcpcsV/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOMqi78PNHjYeJrFWZTjZzNFFoA5nj5UFSmUwfiDAunDgqPeVTr3dFPlRUcNv3xg_L/exec";
 
 
 const imagenesLazo = [
@@ -1043,21 +1043,20 @@ function confirmar(event){
   const asistencia = document.getElementById('asistencia').value;
   const mensaje = document.getElementById('mensaje').value || 'Sin mensaje';
 
-  const texto = 
-`Hola Christopher y Paola 🤍
-
-Soy ${nombre}.
-${asistencia}
-Mensaje: ${mensaje}
-
-¡Gracias por la invitación!`;
-
-  const urlFinal = `${SCRIPT_URL}?action=whatsapp`;
- 
-
-//window.location.href = enlace;
   
- window.location.href = urlFinal;
+  const url =
+    SCRIPT_URL +
+    "?action=whatsapp" +
+    "&nombre=" +
+    encodeURIComponent(nombre) +
+    "&asistencia=" +
+    encodeURIComponent(asistencia) +
+    "&mensaje=" +
+    encodeURIComponent(mensaje);
+
+
+  // Ir al enlace
+  window.location.href = url;
 }
 
 updateDots();
