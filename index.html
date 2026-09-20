@@ -1043,20 +1043,20 @@ function confirmar(event){
   const asistencia = document.getElementById('asistencia').value;
   const mensaje = document.getElementById('mensaje').value || 'Sin mensaje';
 
-  
-  const url =
-    SCRIPT_URL +
-    "?action=whatsapp" +
-    "&nombre=" +
-    encodeURIComponent(nombre) +
-    "&asistencia=" +
-    encodeURIComponent(asistencia) +
-    "&mensaje=" +
-    encodeURIComponent(mensaje);
+  const texto = 
+`Hola Christopher y Paola 🤍
 
+Soy ${nombre}.
+${asistencia}
+Mensaje: ${mensaje}
 
-  // Ir al enlace
-  window.location.href = url;
+¡Gracias por la invitación!`;  
+const numeroTelefono = "50660854780"; 
+
+const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${encodeURIComponent(texto)}`;
+
+// Redirecciona directamente abriendo WhatsApp en la app o web
+window.location.href = urlWhatsApp;
 }
 
 updateDots();
